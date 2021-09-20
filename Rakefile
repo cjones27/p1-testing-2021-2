@@ -1,4 +1,3 @@
-desc "Print reminder about eating more fruit."
-task :apple do
-  puts "Eat more apples!"
+task :test do
+  puts "Hello World"
 end
