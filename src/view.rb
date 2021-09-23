@@ -1,42 +1,48 @@
 # frozen_string_literal: true
 
-class BoardView
+require 'matrix'
+require_relative './observer/observer'
+
+class BoardView < Observer
+  def update(board_model)
+    clean
+    printBoard(board_model)
+  end
+
+  def print_actions
+    puts 'Type number to choose action'
+    puts '1 Unlock Square'
+    puts '2 Flag Square'
+    puts '3 Exit Game'
+  end
+
+  def print_input_error
+    puts 'Please enter a correct input'
+  end
+
   def print_board(board_model)
     matrix = board_model.map
 
     matrix.each do |row|
       squares = []
       row.each do |space|
-        squares.push(space.item)
+        squares.push(space.item_view)
       end
 
       puts squares.join('')
     end
+    STDOUT.flush
   end
 
-  def print_actions
-    puts 'Type number to choose action'
-    puts '1 Display Board'
-    puts '2 Unlock Square'
-    puts '3 Flag Square'
-    puts '4 Exit Game'
-    action = gets
-    print_input_error unless %w[1 2 3 4].include?(action)
-    action
+  def print_enter_x
+    puts 'Enter X coordinate'
   end
 
-  def get_position
-    puts 'Choose Square, type row number'
-    row = gets
-    puts 'Type column number'
-    col = gets
-    [row, col]
+  def print_enter_y
+    puts 'Enter y coordinate'
   end
 
-  private
-
-  def print_input_error
-    puts 'Please enter a correct input'
-    print_actions
+  def print_game_over
+    puts 'Game Over!'
   end
 end
