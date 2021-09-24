@@ -31,6 +31,9 @@ class BoardSquare
   end
 
   attr_reader :item
+  # Los siguientes reader son solo para acceder a los atributos al testear
+  attr_reader :item
+  attr_reader :item
 end
 
 class BoardModel < Observable
