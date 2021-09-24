@@ -50,6 +50,10 @@ class BoardView < Observer
     puts 'Game Over!'
   end
 
+  def print_game_winner
+    puts 'Game Winner! Felicitaciones (:'
+  end
+
   def print_no_F_in_map_error
     puts 'There is no F in the map so you can´t choose option 3 yet'
   end

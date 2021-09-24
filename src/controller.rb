@@ -64,9 +64,14 @@ class BoardController
       return 
     end
 
-    if @model.unlock_square(y, x) == 'game over'
+    resultado_jugada = @model.unlock_square(y, x)
+
+    if resultado_jugada == 'game over'
       @view.print_board(@model)
       exit_game
+    elsif resultado_jugada == 'game winner'
+      @view.print_board(@model)
+      game_winner
     else
       request_input
     end
@@ -147,5 +152,9 @@ class BoardController
 
   def exit_game
     @view.print_game_over
+  end
+
+  def game_winner
+    @view.print_game_winner
   end
 end
