@@ -32,12 +32,15 @@ class BoardSquare
 
   attr_reader :item
   # Los siguientes reader son solo para acceder a los atributos al testear
-  attr_reader :item
-  attr_reader :item
+  attr_reader :flagged 
+  attr_reader :visible
 end
 
 class BoardModel < Observable
   attr_accessor :map
+
+  # Siguientes reader son para usar en los tests
+  attr_reader :cleared_squares
 
   def initialize
     @map = [
