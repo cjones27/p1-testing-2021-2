@@ -76,6 +76,8 @@ class BoardModel < Observable
     @cleared_squares = 0
     @length = 9
     @width = 9
+    @amount_square_to_win = 71
+    # El atributo anterior es 71 ya que son 81 cuadrados y 10 bombas.
     super()
   end
 
@@ -105,6 +107,9 @@ class BoardModel < Observable
 
   def unlock_square(y, x)
     @map[y][x].make_visible
+    # Cada vez q se hace visible, se suma un cudrado despejado
+    @cleared_squares += 1
+    puts @cleared_squares
     if @map[y][x].item == 'B'
       # pierde
       'game over'
@@ -127,7 +132,10 @@ class BoardModel < Observable
           end
         end
       end
-      'to do'
+      #checkeo de victoria
+      if @cleared_squares == 71
+        'game winner'
+      end
     end
   end
 
