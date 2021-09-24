@@ -92,7 +92,7 @@ class BoardModel < Observable
         false
       end
     else
-      # tirar error
+      # nunca se va a entrar a aquí
       false
     end
   end
@@ -110,8 +110,13 @@ class BoardModel < Observable
           if @map[neighbor[0]][neighbor[1]].item_view == '?'
             if @map[y][x].item == '0'
               unlock_square(neighbor[0], neighbor[1])
-            elsif @map[neighbor[0]][neighbor[1]].item == '0'
-              unlock_square(neighbor[0], neighbor[1])
+            # elsif @map[neighbor[0]][neighbor[1]].item == '0'
+            #   unlock_square(neighbor[0], neighbor[1])
+            # las dos líneas anteriores (comentadas), no deberían estar ya que solo 
+            # se desbloquean automáticamente las casillas vecinas de la CASILLA ELEGIDA 
+            # cuando ésta tiene valor 0; no hay por qué desbloquear automáticamente 
+            # las casillas vecinas (a pesar de que tengan valor 0) cuando la CASILLA ELEGIDA
+            # es un número diferente de 0
             end
           end
         end
@@ -139,4 +144,13 @@ class BoardModel < Observable
     neighbors.push([y, x + 1]) if x < @width - 1
     neighbors
   end
+
+  def flag_square(y, x)
+    @map[y][x].flag
+  end
+
+  def uncheck_square(y, x)
+    @map[y][x].flag
+  end
+  
 end
