@@ -3,6 +3,7 @@
 require 'matrix'
 require_relative './observer/observer'
 
+# BoardView
 class BoardView < Observer
   def update(board_model)
     clean
@@ -18,24 +19,29 @@ class BoardView < Observer
   end
 
   def print_input_error
+    puts ' '
     puts 'Please enter a correct input'
   end
 
   def print_board(board_model)
     matrix = board_model.map
-    puts "  012345678"
-    puts "  ---------"
+    puts '  012345678'
+    puts '  ---------'
+    print_matrix(matrix)
+    puts '  ---------'
+    $stdout.flush
+  end
+
+  def print_matrix(matrix)
     counter = 0
     matrix.each do |row|
       squares = []
       row.each do |space|
         squares.push(space.item_view)
       end
-      puts counter.to_s + "|" + squares.join('') + "|"
+      puts "#{counter}|#{squares.join('')}|"
       counter += 1
     end
-    puts "  ---------"
-    STDOUT.flush
   end
 
   def print_enter_x
@@ -54,7 +60,7 @@ class BoardView < Observer
     puts 'You won! Congratulations :)'
   end
 
-  def print_no_F_in_map_error
+  def print_no_flag_in_map_error
     puts 'There is no F in the map so you can´t choose option 3 yet'
   end
 

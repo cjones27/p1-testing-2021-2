@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Observable
 class Observable
   def initialize
     @observers = []
