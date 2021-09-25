@@ -38,9 +38,12 @@ end
 
 class BoardModel < Observable
   attr_accessor :map
+  attr_accessor :cleared_squares
 
   # Siguientes reader son para usar en los tests
-  attr_reader :cleared_squares
+  
+  attr_reader :length
+  attr_reader :width
 
   def initialize
     @map = [
@@ -100,34 +103,25 @@ class BoardModel < Observable
         false
       end
     else
-      # nunca se va a entrar a aquí
       false
     end
   end
 
   def unlock_square(y, x)
     @map[y][x].make_visible
-    # Cada vez q se hace visible, se suma un cudrado despejado
-    @cleared_squares += 1
-    puts @cleared_squares
+    # Cada vez q se hace visible, se suma un cuadrado despejado
+    count_clear_square
     if @map[y][x].item == 'B'
       # pierde
       'game over'
     else
       neighbors = get_neighbors(y, x)
-
       if neighbors != []
         neighbors.each do |neighbor|
           if @map[neighbor[0]][neighbor[1]].item_view == '?'
             if @map[y][x].item == '0'
               unlock_square(neighbor[0], neighbor[1])
-            # elsif @map[neighbor[0]][neighbor[1]].item == '0'
-            #   unlock_square(neighbor[0], neighbor[1])
-            # las dos líneas anteriores (comentadas), no deberían estar ya que solo 
-            # se desbloquean automáticamente las casillas vecinas de la CASILLA ELEGIDA 
-            # cuando ésta tiene valor 0; no hay por qué desbloquear automáticamente 
-            # las casillas vecinas (a pesar de que tengan valor 0) cuando la CASILLA ELEGIDA
-            # es un número diferente de 0
+              return true
             end
           end
         end
@@ -161,10 +155,12 @@ class BoardModel < Observable
 
   def flag_square(y, x)
     @map[y][x].flag
+    true
   end
 
   def uncheck_square(y, x)
     @map[y][x].flag
+    true
   end
   
 end
