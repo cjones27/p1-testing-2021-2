@@ -239,17 +239,4 @@ class BoardModelNeighborsTest < Test::Unit::TestCase
     assert_equal(neighbors.length, neighbors_expected.length)
   end
 
-  def test_unlock_square_case_value0
-    # Ya que la casilla casilla seleccionada tiene valor 0 y es la primera
-    # casilla en ser descubierta, se desbloquean automaticamente sus vecinos
-    # ya que no tiene bombas en casillas colindantes (por tener valor 0).
-    # Por lo anterior deberia retornarse el true del metodo unlock_square cuando se
-    # entra a la condicion de flujo asociada a este caso
-    # Usaremos la casilla y = 3, x = 3 ya que tiene valor 0
-    @boardmodel.cleared_squares = 0
-    x = 3
-    y = 3
-    boolean = @boardmodel.unlock_square(y, x)
-    assert(boolean)
-  end
 end
