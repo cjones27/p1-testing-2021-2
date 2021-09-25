@@ -16,7 +16,7 @@ class BoardController
     if action == 1
       unlock_square
     elsif action == 2 
-      flag_square
+      request_flag_coordinates
     elsif action == 3
       uncheck_square
     elsif action == 4
@@ -77,12 +77,12 @@ class BoardController
     end
   end
 
-  def flag_square
+  def request_flag_coordinates
     @view.print_enter_x
     x = $stdin.gets.to_i
     if @model.check_if_valid_coordinate('x', x) == false
       print_input_error
-      flag_square
+      request_flag_coordinates
       return 
     end
 
@@ -90,19 +90,26 @@ class BoardController
     y = $stdin.gets.to_i
     if @model.check_if_valid_coordinate('y', y) == false
       print_input_error
-      flag_square
+      request_flag_coordinates
       return 
     end
+    
+    action = flag_square(y, x)
+    if !action
+      request_flag_coordinates
+      return 
+    end
+    request_input
+  end
 
-    if @model.map[y][x].item_view != '?'
+  def flag_square(y, x)
+    if @model.map[y][x].item_view.include?("F?")
       print_input_error
       @view.print_flag_square_error
-      flag_square
-      return 
+      return false
     end
 
     @model.flag_square(y, x)
-    request_input
   end
 
   def uncheck_square

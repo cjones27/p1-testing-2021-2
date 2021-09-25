@@ -4,6 +4,11 @@ require_relative './observer/observable'
 require 'matrix'
 
 class BoardSquare
+  attr_reader :item
+  # Los siguientes reader son solo para acceder a los atributos al testear
+  attr_reader :flagged 
+  attr_reader :visible
+  
   def initialize(item)
     # @visible = item == ' '
     @visible = false
@@ -30,10 +35,6 @@ class BoardSquare
     end
   end
 
-  attr_reader :item
-  # Los siguientes reader son solo para acceder a los atributos al testear
-  attr_reader :flagged 
-  attr_reader :visible
 end
 
 class BoardModel < Observable
