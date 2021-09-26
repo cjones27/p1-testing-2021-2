@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml'>
   <head>
-    <title>Code coverage for P1-testing-2021-2</title>
+    <title>Code coverage for Proyecto 1</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.12.3/application.js' type='text/javascript'></script>
     <link href='./assets/0.12.3/application.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-09-26T14:56:38-03:00">2021-09-26T14:56:38-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-09-26T18:54:42-03:00">2021-09-26T18:54:42-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  40.98%
+  40.48%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.57
+         0.56
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>122</b> relevant lines,
-    <span class="green"><b>50</b> lines covered</span> and
-    <span class="red"><b>72</b> lines missed. </span>
+    <b>126</b> relevant lines,
+    <span class="green"><b>51</b> lines covered</span> and
+    <span class="red"><b>75</b> lines missed. </span>
     (<span class="red">
-  40.98%
+  40.48%
 </span>
 )
   </div>
@@ -71,18 +71,18 @@
       <tbody>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#f889f5478ded7624318960da583bb8a524cf3eb1" class="src_link" title="src/model.rb">src/model.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">40.00 %</td>
-            <td class="cell--number">239</td>
-            <td class="cell--number">115</td>
-            <td class="cell--number">46</td>
-            <td class="cell--number">69</td>
-            <td class="cell--number">0.57</td>
+            <td class="strong t-file__name"><a href="#9b637fb624a02339dac83c050e2ac50077e35a45" class="src_link" title="src/model.rb">src/model.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">39.50 %</td>
+            <td class="cell--number">247</td>
+            <td class="cell--number">119</td>
+            <td class="cell--number">47</td>
+            <td class="cell--number">72</td>
+            <td class="cell--number">0.55</td>
             
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#9b909949cb9c3f7d33f074c16c7792d51cf60b9c" class="src_link" title="src/observer/observable.rb">src/observer/observable.rb</a></td>
+            <td class="strong t-file__name"><a href="#a221c55f08735ef54a14532d6ae05787cdfa9b64" class="src_link" title="src/observer/observable.rb">src/observer/observable.rb</a></td>
             <td class="red strong cell--number t-file__coverage">57.14 %</td>
             <td class="cell--number">16</td>
             <td class="cell--number">7</td>
@@ -109,12 +109,12 @@
 
       <div class="source_files">
       
-        <div class="source_table" id="f889f5478ded7624318960da583bb8a524cf3eb1">
+        <div class="source_table" id="9b637fb624a02339dac83c050e2ac50077e35a45">
   <div class="header">
     <h3>src/model.rb</h3>
     <h4>
       <span class="red">
-  40.0%
+  39.5%
 </span>
 
       lines covered
@@ -123,9 +123,9 @@
     
 
     <div class="t-line-summary">
-      <b>115</b> relevant lines.
-      <span class="green"><b>46</b> lines covered</span> and
-      <span class="red"><b>69</b> lines missed.</span>
+      <b>119</b> relevant lines.
+      <span class="green"><b>47</b> lines covered</span> and
+      <span class="red"><b>72</b> lines missed.</span>
     </div>
 
     
@@ -1759,7 +1759,7 @@
 
             
 
-            <code class="ruby">    if (@width &gt; value) &amp;&amp; (value &gt;= 0)</code>
+            <code class="ruby">    if only_int_in_str(value) &amp;&amp; (@width &gt; value.to_i) &amp;&amp; (value.to_i &gt;= 0)</code>
           </li>
         </div>
       
@@ -1847,7 +1847,7 @@
 
             
 
-            <code class="ruby">    if (@length &gt; value) &amp;&amp; (value &gt;= 0)</code>
+            <code class="ruby">    if only_int_in_str(value) &amp;&amp; (@length &gt; value.to_i) &amp;&amp; (value.to_i &gt;= 0)</code>
           </li>
         </div>
       
@@ -2760,6 +2760,94 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="240">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def only_int_in_str(str)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="241">
+            
+            
+
+            
+
+            <code class="ruby">    if str =~ /[a-zA-Z!@£$%^&amp;*()_{}&quot;|?&gt;&lt;~]+/</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="242">
+            
+            
+
+            
+
+            <code class="ruby">      false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="243">
+            
+            
+
+            
+
+            <code class="ruby">    else </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="244">
+            
+            
+
+            
+
+            <code class="ruby">      true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="245">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="246">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="247">
+            
+            
+
+            
+
             <code class="ruby">end</code>
           </li>
         </div>
@@ -2769,7 +2857,7 @@
 </div>
 
       
-        <div class="source_table" id="9b909949cb9c3f7d33f074c16c7792d51cf60b9c">
+        <div class="source_table" id="a221c55f08735ef54a14532d6ae05787cdfa9b64">
   <div class="header">
     <h3>src/observer/observable.rb</h3>
     <h4>

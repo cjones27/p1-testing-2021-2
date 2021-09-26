@@ -145,7 +145,7 @@ class BoardModel < Observable
   end
 
   def check_x_valid_coordinate(value)
-    if (@width > value) && (value >= 0)
+    if only_int_in_str(value) && (@width > value.to_i) && (value.to_i >= 0)
       true
     else
       false
@@ -153,7 +153,7 @@ class BoardModel < Observable
   end
 
   def check_y_valid_coordinate(value)
-    if (@length > value) && (value >= 0)
+    if only_int_in_str(value) && (@length > value.to_i) && (value.to_i >= 0)
       true
     else
       false
@@ -235,5 +235,13 @@ class BoardModel < Observable
 
     @map[y_position][x_position].flag
     true
+  end
+
+  def only_int_in_str(str)
+    if str =~ /[a-zA-Z!@£$%^&*()_{}"|?><~]+/
+      false
+    else 
+      true
+    end
   end
 end
