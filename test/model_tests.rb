@@ -38,6 +38,21 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
     assert(!boolean)
   end
 
+  def test_check_if_valid_coordinate_case_x_letter_in_input
+    x = "1a"
+    assert(!@boardmodel.check_if_valid_coordinate('x', x))
+  end
+
+  def test_check_if_valid_coordinate_case_x_special_char_in_input
+    x = "%1$%^"
+    assert(!@boardmodel.check_if_valid_coordinate('x', x))
+  end
+
+  def test_check_if_valid_coordinate_case_x_only_letters_in_input
+    x = "asdadsasd"
+    assert(!@boardmodel.check_if_valid_coordinate('x', x))
+  end
+
   def test_check_if_valid_coordinate_case_y_under_range
     y = -10
     boolean = @boardmodel.check_if_valid_coordinate('y', y)
@@ -60,6 +75,21 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
     y = rand(@boardmodel.length)
     boolean = @boardmodel.check_if_valid_coordinate('z', y)
     assert(!boolean)
+  end
+
+  def test_check_if_valid_coordinate_case_y_letter_in_input
+    y = "1a"
+    assert(!@boardmodel.check_if_valid_coordinate('y', y))
+  end
+
+  def test_check_if_valid_coordinate_case_y_special_char_in_input
+    y = "%1$%^"
+    assert(!@boardmodel.check_if_valid_coordinate('y', y))
+  end
+
+  def test_check_if_valid_coordinate_case_y_only_letters_in_input
+    y = "asdadsasd"
+    assert(!@boardmodel.check_if_valid_coordinate('y', y))
   end
 end
 

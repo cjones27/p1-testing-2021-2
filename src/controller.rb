@@ -38,14 +38,14 @@ class BoardController
   def coords_input
     @view.print_enter_x
 
-    x = $stdin.gets.to_i
-    return false if @model.check_if_valid_coordinate('x', x) == false
+    x = $stdin.gets
+    return false if !@model.check_if_valid_coordinate('x', x)
 
     @view.print_enter_y
-    y = $stdin.gets.to_i
-    return false if @model.check_if_valid_coordinate('y', y) == false
+    y = $stdin.gets
+    return false if !@model.check_if_valid_coordinate('y', y)
 
-    [x, y]
+    [x.to_i, y.to_i]
   end
 
   def unlock_square

@@ -1,7 +1,7 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/home/jirojas/Desktop/u_2021_2/testing/p1-testing-2021-2/src/model.rb": {
+      "/Users/cristobaljones/Desktop/Jones/Ingenieria/Semestres/Semestre Actual/Testing/Proyecto 1/src/model.rb": {
         "lines": [
           null,
           null,
@@ -198,10 +198,18 @@
           0,
           0,
           null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
           null
         ]
       },
-      "/home/jirojas/Desktop/u_2021_2/testing/p1-testing-2021-2/src/observer/observable.rb": {
+      "/Users/cristobaljones/Desktop/Jones/Ingenieria/Semestres/Semestre Actual/Testing/Proyecto 1/src/observer/observable.rb": {
         "lines": [
           null,
           null,
