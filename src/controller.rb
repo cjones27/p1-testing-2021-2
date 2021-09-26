@@ -2,6 +2,7 @@
 
 require 'matrix'
 
+# BoardController
 class BoardController
   def initialize(board_model, board_view)
     @model = board_model
@@ -13,13 +14,14 @@ class BoardController
     @view.print_actions
     action = $stdin.gets.to_i
 
-    if action == 1
+    case action
+    when 1
       unlock_square
-    elsif action == 2 
+    when 2
       request_flag_coordinates
-    elsif action == 3
+    when 3
       uncheck_square
-    elsif action == 4
+    when 4
       exit_game
     else
       print_input_error
@@ -40,36 +42,37 @@ class BoardController
     @view.print_enter_x
     x = $stdin.gets.to_i
 
-    #print_input_error unless @model.check_if_valid_coordinate('x', x)
+    # print_input_error unless @model.check_if_valid_coordinate('x', x)
     if @model.check_if_valid_coordinate('x', x) == false
       print_input_error
       unlock_square
-      return 
+      return
     end
 
     @view.print_enter_y
     y = $stdin.gets.to_i
 
-    #print_input_error unless @model.check_if_valid_coordinate('y', y)
+    # print_input_error unless @model.check_if_valid_coordinate('y', y)
     if @model.check_if_valid_coordinate('y', y) == false
       print_input_error
       unlock_square
-      return 
+      return
     end
 
     if @model.map[y][x].item_view != '?'
       print_input_error
       @view.print_unlock_square_error
       request_input
-      return 
+      return
     end
 
     resultado_jugada = @model.unlock_square(y, x)
 
-    if resultado_jugada == 'game over'
+    case resultado_jugada
+    when 'game over'
       @view.print_board(@model)
       exit_game
-    elsif resultado_jugada == 'game winner'
+    when 'game winner'
       @view.print_board(@model)
       game_winner
     else
@@ -83,7 +86,7 @@ class BoardController
     if @model.check_if_valid_coordinate('x', x) == false
       print_input_error
       request_flag_coordinates
-      return 
+      return
     end
 
     @view.print_enter_y
@@ -91,35 +94,35 @@ class BoardController
     if @model.check_if_valid_coordinate('y', y) == false
       print_input_error
       request_flag_coordinates
-      return 
+      return
     end
-    
+
     action = flag_square(y, x)
-    if !action
+    unless action
       request_flag_coordinates
-      return 
+      return
     end
     request_input
   end
 
-  def flag_square(y, x)
-    if @model.map[y][x].item_view.include?("F?")
+  def flag_square(y_coordinate, x_coordinate)
+    if @model.map[y_coordinate][x_coordinate].item_view.include?('F?')
       print_input_error
       @view.print_flag_square_error
       return false
     end
 
-    @model.flag_square(y, x)
+    @model.flag_square(y_coordinate, x_coordinate)
   end
 
   def uncheck_square
-    if check_F_in_map == true
+    if check_flag_in_map == true
       @view.print_enter_x
       x = $stdin.gets.to_i
       if @model.check_if_valid_coordinate('x', x) == false
         print_input_error
         uncheck_square
-        return 
+        return
       end
 
       @view.print_enter_y
@@ -127,34 +130,31 @@ class BoardController
       if @model.check_if_valid_coordinate('y', y) == false
         print_input_error
         uncheck_square
-        return 
+        return
       end
 
       if @model.map[y][x].item_view != 'F'
         print_input_error
         uncheck_square
-        return 
+        return
       end
 
       @model.uncheck_square(y, x)
-      request_input
-    else 
+    else
       print_input_error
-      @view.print_no_F_in_map_error
-      request_input
+      @view.print_no_flag_in_map_error
     end
+    request_input
   end
 
-  def check_F_in_map
+  def check_flag_in_map
     matrix = @model.map
     matrix.each do |row|
       row.each do |space|
-        if space.item_view == 'F'
-          return true
-        end
+        return true if space.item_view == 'F'
       end
     end
-    return false
+    false
   end
 
   def exit_game
