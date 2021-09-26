@@ -195,7 +195,7 @@ class BoardModel < Observable
   end
 
   def only_int_in_str(str)
-    if str =~ /[a-zA-Z!@£$%^&*()_{}"|?><~]+/
+    if str =~ /[a-zA-Z!@£$%^&*()_{}"|?><~+“‘«æ÷≥≤«¡≠–`±’”Æ»Ú˘¿¯]/ or str.to_s.match?(" ")
       false
     else 
       true
