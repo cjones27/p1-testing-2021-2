@@ -11,4 +11,4 @@ view = BoardView.new
 model.add_observer(view)
 controller = BoardController.new(model, view)
 # controller.display_board
-controller.request_input
+controller.main_menu

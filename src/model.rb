@@ -161,7 +161,12 @@ class BoardModel < Observable
   end
 
   def unlock_square(y_position, x_position)
-    return 'game over' if unlock_selected_square(y_position, x_position) == 'game over'
+    check_unlock = unlock_selected_square(y_position, x_position)
+    return check_unlock if check_unlock != 'next'
+
+    # return 'game over' if unlock_selected_square(y_position, x_position) == 'game over'
+
+    # return 'square already unlocked' if @map[y_position][x_position].item_view == '?'
 
     neighbors = get_neighbors(y_position, x_position)
     if neighbors != []
@@ -176,6 +181,8 @@ class BoardModel < Observable
   end
 
   def unlock_selected_square(y_position, x_position)
+    return 'square already unlocked' if @map[y_position][x_position].item_view != '?'
+
     @map[y_position][x_position].make_visible
     count_clear_square
     return 'game over' if @map[y_position][x_position].item == 'B'
@@ -213,12 +220,19 @@ class BoardModel < Observable
     neighbors
   end
 
-  def flag_square(y_position, x_position)
-    @map[y_position][x_position].flag
-    true
-  end
+  # def flag_square(y_position, x_position)
+  #   @map[y_position][x_position].flag
+  #   true
+  # end
 
-  def uncheck_square(y_position, x_position)
+  # def uncheck_square(y_position, x_position)
+  #   @map[y_position][x_position].flag
+  #   true
+  # end
+
+  def flag_unflag_square(y_position, x_position)
+    return 'square already unlocked' if @map[y_position][x_position].visible
+
     @map[y_position][x_position].flag
     true
   end
