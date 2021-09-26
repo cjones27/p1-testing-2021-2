@@ -42,70 +42,27 @@ class BoardMap
 
   def initialize
     @map = []
-
-    push_map_part1
-    push_map_part2
-    push_map_part3
-    push_map_part4
-    push_map_part5
-    push_map_part6
-    push_map_part7
-    push_map_part8
-    push_map_part9
+    populate_map
   end
 
-  def push_map_part1
-    @map.push([BoardSquare.new('B'), BoardSquare.new('3'), BoardSquare.new('B'),
-               BoardSquare.new('1'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0')])
+  def populate_map
+    create_row(%w[B 3 B 1 0 0 0 0 0])
+    create_row(%w[2 B 2 1 0 0 1 1 1])
+    create_row(%w[1 1 1 0 0 0 1 B 1])
+    create_row(%w[0 0 0 0 0 0 1 1 1])
+    create_row(%w[0 0 0 1 1 2 2 2 1])
+    create_row(%w[0 0 0 1 B 3 B B 1])
+    create_row(%w[0 0 0 1 1 3 B 3 1])
+    create_row(%w[0 0 0 1 1 2 2 2 1])
+    create_row(%w[0 0 0 1 B 1 1 B 1])
   end
 
-  def push_map_part2
-    @map.push([BoardSquare.new('2'), BoardSquare.new('B'), BoardSquare.new('2'),
-               BoardSquare.new('1'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('1'), BoardSquare.new('1')])
-  end
-
-  def push_map_part3
-    @map.push([BoardSquare.new('1'), BoardSquare.new('1'), BoardSquare.new('1'),
-               BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('B'), BoardSquare.new('1')])
-  end
-
-  def push_map_part4
-    @map.push([BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('1'), BoardSquare.new('1')])
-  end
-
-  def push_map_part5
-    @map.push([BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('1'), BoardSquare.new('2'),
-               BoardSquare.new('2'), BoardSquare.new('2'), BoardSquare.new('1')])
-  end
-
-  def push_map_part6
-    @map.push([BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('B'), BoardSquare.new('3'),
-               BoardSquare.new('B'), BoardSquare.new('B'), BoardSquare.new('1')])
-  end
-
-  def push_map_part7
-    @map.push([BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('1'), BoardSquare.new('3'),
-               BoardSquare.new('B'), BoardSquare.new('3'), BoardSquare.new('1')])
-  end
-
-  def push_map_part8
-    @map.push([BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('1'), BoardSquare.new('2'),
-               BoardSquare.new('2'), BoardSquare.new('2'), BoardSquare.new('1')])
-  end
-
-  def push_map_part9
-    @map.push([BoardSquare.new('0'), BoardSquare.new('0'), BoardSquare.new('0'),
-               BoardSquare.new('1'), BoardSquare.new('B'), BoardSquare.new('1'),
-               BoardSquare.new('1'), BoardSquare.new('B'), BoardSquare.new('1')])
+  def create_row(items_in_row)
+    row = []
+    items_in_row.each do |item|
+      row.push(BoardSquare.new(item))
+    end
+    @map.push(row)
   end
 end
 
