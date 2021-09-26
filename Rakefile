@@ -6,4 +6,5 @@ task :test do
   ruby 'test/model_tests.rb'
   ruby 'test/controller_tests.rb'
   ruby 'test/square_tests.rb'
+  ruby 'test/board_map_tests.rb'
 end
