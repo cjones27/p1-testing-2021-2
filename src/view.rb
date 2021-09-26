@@ -13,9 +13,8 @@ class BoardView < Observer
   def print_actions
     puts 'Type number to choose action'
     puts '1 Unlock Square'
-    puts '2 Flag Square'
-    puts '3 Uncheck Square'
-    puts '4 Exit Game'
+    puts '2 Flag/unflag Square'
+    puts '3 Exit Game'
   end
 
   def print_input_error
@@ -52,11 +51,13 @@ class BoardView < Observer
     puts 'Enter Y coordinate'
   end
 
-  def print_game_over
+  def print_game_over(board_model)
+    print_board(board_model)
     puts 'Game Over!'
   end
 
-  def print_game_winner
+  def print_game_winner(board_model)
+    print_board(board_model)
     puts 'You won! Congratulations :)'
   end
 
@@ -70,6 +71,10 @@ class BoardView < Observer
 
   def print_unlock_square_error
     puts 'You can´t unlock a square which has already been unlocked or flagged'
-    puts 'If the square chosen is flagged, you can uncheck it and then unlock'
+    puts 'If the square chosen is flagged, you can unflag it and then unlock'
+  end
+
+  def print_exit
+    puts 'See you soon! :)'
   end
 end

@@ -9,7 +9,7 @@ class BoardController
     @view = board_view
   end
 
-  def request_input
+  def main_menu
     @view.print_board(@model)
     @view.print_actions
     action = $stdin.gets.to_i
@@ -18,150 +18,74 @@ class BoardController
     when 1
       unlock_square
     when 2
-      request_flag_coordinates
+      flag_unflag_square
     when 3
-      uncheck_square
-    when 4
-      exit_game
+      @view.print_exit
     else
-      print_input_error
-      request_input
+      handle_input_error
     end
   end
 
-  def display_board
-    @view.print_board(@model)
-    request_input
+  def handle_input_error
+    @view.print_input_error
+    main_menu
   end
 
   def print_input_error
     @view.print_input_error
   end
 
-  def unlock_square
+  def coords_input
     @view.print_enter_x
-    x = $stdin.gets.to_i
 
-    # print_input_error unless @model.check_if_valid_coordinate('x', x)
-    if @model.check_if_valid_coordinate('x', x) == false
-      print_input_error
-      unlock_square
-      return
-    end
+    x = $stdin.gets.to_i
+    return false if @model.check_if_valid_coordinate('x', x) == false
 
     @view.print_enter_y
     y = $stdin.gets.to_i
+    return false if @model.check_if_valid_coordinate('y', y) == false
 
-    # print_input_error unless @model.check_if_valid_coordinate('y', y)
-    if @model.check_if_valid_coordinate('y', y) == false
+    [x, y]
+  end
+
+  def unlock_square
+    coords = coords_input
+    if coords == false
       print_input_error
       unlock_square
       return
     end
 
-    if @model.map[y][x].item_view != '?'
-      print_input_error
-      @view.print_unlock_square_error
-      request_input
-      return
-    end
+    x = coords[0]
+    y = coords[1]
 
     resultado_jugada = @model.unlock_square(y, x)
 
     case resultado_jugada
     when 'game over'
-      @view.print_board(@model)
-      exit_game
+      @view.print_game_over(@model)
     when 'game winner'
-      @view.print_board(@model)
-      game_winner
+      @view.print_game_winner(@model)
+    when 'square already unlocked'
+      @view.print_unlock_square_error
+      main_menu
     else
-      request_input
+      main_menu
     end
   end
 
-  def request_flag_coordinates
-    @view.print_enter_x
-    x = $stdin.gets.to_i
-    if @model.check_if_valid_coordinate('x', x) == false
+  def flag_unflag_square
+    coords = coords_input
+    if coords == false
       print_input_error
-      request_flag_coordinates
+      flag_unflag_square
       return
     end
 
-    @view.print_enter_y
-    y = $stdin.gets.to_i
-    if @model.check_if_valid_coordinate('y', y) == false
-      print_input_error
-      request_flag_coordinates
-      return
-    end
+    x = coords[0]
+    y = coords[1]
 
-    action = flag_square(y, x)
-    unless action
-      request_flag_coordinates
-      return
-    end
-    request_input
-  end
-
-  def flag_square(y_coordinate, x_coordinate)
-    if @model.map[y_coordinate][x_coordinate].item_view.include?('F?')
-      print_input_error
-      @view.print_flag_square_error
-      return false
-    end
-
-    @model.flag_square(y_coordinate, x_coordinate)
-  end
-
-  def uncheck_square
-    if check_flag_in_map == true
-      @view.print_enter_x
-      x = $stdin.gets.to_i
-      if @model.check_if_valid_coordinate('x', x) == false
-        print_input_error
-        uncheck_square
-        return
-      end
-
-      @view.print_enter_y
-      y = $stdin.gets.to_i
-      if @model.check_if_valid_coordinate('y', y) == false
-        print_input_error
-        uncheck_square
-        return
-      end
-
-      if @model.map[y][x].item_view != 'F'
-        print_input_error
-        uncheck_square
-        return
-      end
-
-      @model.uncheck_square(y, x)
-    else
-      print_input_error
-      @view.print_no_flag_in_map_error
-    end
-    request_input
-  end
-
-  def check_flag_in_map
-    matrix = @model.map
-    matrix.each do |row|
-      row.each do |space|
-        return true if space.item_view == 'F'
-      end
-    end
-    false
-  end
-
-  def exit_game
-    @view.print_game_over
-  end
-
-  def game_winner
-    @view.print_game_winner
+    @view.print_flag_square_error if @model.flag_unflag_square(y, x) == 'square already unlocked'
+    main_menu
   end
 end

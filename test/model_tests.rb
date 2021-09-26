@@ -88,32 +88,32 @@ class BoardModelSquareTest < Test::Unit::TestCase
   end
 
   def test_flag_square_b
-    boolean = @boardmodel.flag_square(2, 0)
+    boolean = @boardmodel.flag_unflag_square(2, 0)
     assert(boolean)
   end
 
   def test_uncheck_square_b
-    boolean = @boardmodel.uncheck_square(2, 0)
+    boolean = @boardmodel.flag_unflag_square(2, 0)
     assert(boolean)
   end
 
   def test_flag_square_zero
-    boolean = @boardmodel.flag_square(3, 0)
+    boolean = @boardmodel.flag_unflag_square(3, 0)
     assert(boolean)
   end
 
   def test_uncheck_square_zero
-    boolean = @boardmodel.uncheck_square(3, 0)
+    boolean = @boardmodel.flag_unflag_square(3, 0)
     assert(boolean)
   end
 
   def test_flag_square_number
-    boolean = @boardmodel.flag_square(1, 0)
+    boolean = @boardmodel.flag_unflag_square(1, 0)
     assert(boolean)
   end
 
   def test_uncheck_square_number
-    boolean = @boardmodel.uncheck_square(1, 0)
+    boolean = @boardmodel.flag_unflag_square(1, 0)
     assert(boolean)
   end
 end
@@ -238,5 +238,4 @@ class BoardModelNeighborsTest < Test::Unit::TestCase
     assert(set_neighbors.difference(set_neighbors_expected).none?)
     assert_equal(neighbors.length, neighbors_expected.length)
   end
-
 end
