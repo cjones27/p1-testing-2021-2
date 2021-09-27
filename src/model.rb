@@ -25,6 +25,10 @@ class BoardSquare
     @flagged = false
   end
 
+  def assign_item(item)
+    @item = item
+  end
+
   def item_view
     if @flagged
       'F'
@@ -39,22 +43,84 @@ end
 # BoardMap
 class BoardMap
   attr_accessor :map
+  attr_reader :length, :width
 
   def initialize
+    @length = 8
+    @width = 8
+    @string_map = Array.new(@length) { Array.new(@width, 0) }
     @map = []
+    @bomb_count = 10
+    create_map
+  end
+
+  def create_map
+    create_bomb_coords
+    fill_numbers
     populate_map
   end
 
+  def create_bomb_coords
+    bomb_coords = []
+
+    while bomb_coords.length != @bomb_count
+      y = rand(@length)
+      x = rand(@width)
+      next if bomb_coords.include? [y, x]
+
+      bomb_coords.push([y, x])
+    end
+
+    bomb_coords.each do |bomb|
+      @string_map[bomb[0]][bomb[1]] = 'B'
+    end
+  end
+
+  def fill_numbers
+    (0..(@length - 1)).each do |y|
+      (0..(@width - 1)).each do |x|
+        next if @string_map[y][x] == 'B'
+
+        @string_map[y][x] = count_bombs(y, x)
+      end
+    end
+  end
+
+  def count_bombs(y_position, x_position)
+    count = 0
+    count += count_upper_bombs(y_position, x_position) if y_position >= 1
+    count += count_lower_bombs(y_position, x_position) if y_position < @length - 1
+    count += count_side_bombs(y_position, x_position)
+    count
+  end
+
+  def count_side_bombs(y_position, x_position)
+    count = 0
+    count += 1 if x_position >= 1 && @string_map[y_position][x_position - 1] == 'B'
+    count += 1 if x_position < @width - 1 && @string_map[y_position][x_position + 1] == 'B'
+    count
+  end
+
+  def count_upper_bombs(y_position, x_position)
+    count = 0
+    count += 1 if @string_map[y_position - 1][x_position] == 'B'
+    count += 1 if x_position >= 1 && @string_map[y_position - 1][x_position - 1] == 'B'
+    count += 1 if x_position < @width - 1 && @string_map[y_position - 1][x_position + 1] == 'B'
+    count
+  end
+
+  def count_lower_bombs(y_position, x_position)
+    count = 0
+    count += 1 if @string_map[y_position + 1][x_position] == 'B'
+    count += 1 if x_position >= 1 && @string_map[y_position + 1][x_position - 1] == 'B'
+    count += 1 if x_position < @width - 1 && @string_map[y_position + 1][x_position + 1] == 'B'
+    count
+  end
+
   def populate_map
-    create_row(%w[B 3 B 1 0 0 0 0 0])
-    create_row(%w[2 B 2 1 0 0 1 1 1])
-    create_row(%w[1 1 1 0 0 0 1 B 1])
-    create_row(%w[0 0 0 0 0 0 1 1 1])
-    create_row(%w[0 0 0 1 1 2 2 2 1])
-    create_row(%w[0 0 0 1 B 3 B B 1])
-    create_row(%w[0 0 0 1 1 3 B 3 1])
-    create_row(%w[0 0 0 1 1 2 2 2 1])
-    create_row(%w[0 0 0 1 B 1 1 B 1])
+    @string_map.each do |row|
+      create_row(row)
+    end
   end
 
   def create_row(items_in_row)
@@ -79,8 +145,8 @@ class BoardModel < Observable
     @map = @mapclass.map
 
     @cleared_squares = 0
-    @length = 9
-    @width = 9
+    @length = @mapclass.length
+    @width = @mapclass.width
     @amount_square_to_win = 71
     # El atributo anterior es 71 ya que son 81 cuadrados y 10 bombas.
     super()
@@ -177,16 +243,6 @@ class BoardModel < Observable
     neighbors
   end
 
-  # def flag_square(y_position, x_position)
-  #   @map[y_position][x_position].flag
-  #   true
-  # end
-
-  # def uncheck_square(y_position, x_position)
-  #   @map[y_position][x_position].flag
-  #   true
-  # end
-
   def flag_unflag_square(y_position, x_position)
     return 'square already unlocked' if @map[y_position][x_position].visible
 
@@ -195,9 +251,9 @@ class BoardModel < Observable
   end
 
   def only_int_in_str(str)
-    if str =~ /[a-zA-Z!@£$%^&*()_{}"|?><~+“‘«æ÷≥≤«¡≠–`±’”Æ»Ú˘¿¯]/ or str.to_s.match?(" ")
+    if str =~ (/[a-zA-Z!@£$%^&*()_{}"|?><~+“‘«æ÷≥≤«¡≠–`±’”Æ»Ú˘¿¯]/) || str.to_s.match?(' ')
       false
-    else 
+    else
       true
     end
   end

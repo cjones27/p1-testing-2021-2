@@ -39,11 +39,11 @@ class BoardController
     @view.print_enter_x
 
     x = $stdin.gets
-    return false if !@model.check_if_valid_coordinate('x', x)
+    return false unless @model.check_if_valid_coordinate('x', x)
 
     @view.print_enter_y
     y = $stdin.gets
-    return false if !@model.check_if_valid_coordinate('y', y)
+    return false unless @model.check_if_valid_coordinate('y', y)
 
     [x.to_i, y.to_i]
   end

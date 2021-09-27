@@ -39,17 +39,17 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
   end
 
   def test_check_if_valid_coordinate_case_x_letter_in_input
-    x = "1a"
+    x = '1a'
     assert(!@boardmodel.check_if_valid_coordinate('x', x))
   end
 
   def test_check_if_valid_coordinate_case_x_special_char_in_input
-    x = "%1$%^"
+    x = '%1$%^'
     assert(!@boardmodel.check_if_valid_coordinate('x', x))
   end
 
   def test_check_if_valid_coordinate_case_x_only_letters_in_input
-    x = "asdadsasd"
+    x = 'asdadsasd'
     assert(!@boardmodel.check_if_valid_coordinate('x', x))
   end
 
@@ -78,17 +78,17 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
   end
 
   def test_check_if_valid_coordinate_case_y_letter_in_input
-    y = "1a"
+    y = '1a'
     assert(!@boardmodel.check_if_valid_coordinate('y', y))
   end
 
   def test_check_if_valid_coordinate_case_y_special_char_in_input
-    y = "%1$%^"
+    y = '%1$%^'
     assert(!@boardmodel.check_if_valid_coordinate('y', y))
   end
 
   def test_check_if_valid_coordinate_case_y_only_letters_in_input
-    y = "asdadsasd"
+    y = 'asdadsasd'
     assert(!@boardmodel.check_if_valid_coordinate('y', y))
   end
 end
@@ -98,24 +98,24 @@ class BoardModelSquareTest < Test::Unit::TestCase
     @boardmodel = BoardModel.new
   end
 
-  def test_unlock_square_case_game_over
-    # ya que la casilla 0,0 tiene bomba, la usaremos para el test
-    x = 0
-    y = 0
-    string = @boardmodel.unlock_square(y, x)
-    assert_equal(string, 'game over')
-  end
+  # def test_unlock_square_case_game_over
+  #   # ya que la casilla 0,0 tiene bomba, la usaremos para el test
+  #   x = 0
+  #   y = 0
+  #   string = @boardmodel.unlock_square(y, x)
+  #   assert_equal(string, 'game over')
+  # end
 
-  def test_unlock_square_case_winner
-    # ya que la casilla 1,0 no tiene bomba, la usaremos para desbloquear la ultima
-    # casilla restante
-    x = 1
-    y = 0
-    # seteamos en 70 los cuadrados descubiertos
-    @boardmodel.cleared_squares = 70
-    string = @boardmodel.unlock_square(y, x)
-    assert_equal(string, 'game winner')
-  end
+  # def test_unlock_square_case_winner
+  #   # ya que la casilla 1,0 no tiene bomba, la usaremos para desbloquear la ultima
+  #   # casilla restante
+  #   x = 1
+  #   y = 0
+  #   # seteamos en 70 los cuadrados descubiertos
+  #   @boardmodel.cleared_squares = 70
+  #   string = @boardmodel.unlock_square(y, x)
+  #   assert_equal(string, 'game winner')
+  # end
 
   def test_flag_square_b
     boolean = @boardmodel.flag_unflag_square(2, 0)

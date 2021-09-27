@@ -11,7 +11,7 @@ class BoardMapTest < Test::Unit::TestCase
   end
 
   def test_populate
-    @mapclass.populate_map
+    @mapclass.create_row(%w[B 3 B 1 0 0 0 0 0])
     assert_equal('B', @mapclass.map[0][0].item)
     assert_equal(false, @mapclass.map[0][0].visible)
     assert_equal(false, @mapclass.map[0][0].flagged)
