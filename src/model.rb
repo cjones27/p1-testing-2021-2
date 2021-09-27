@@ -81,7 +81,7 @@ class BoardMap
       (0..(@width - 1)).each do |x|
         next if @string_map[y][x] == 'B'
 
-        @string_map[y][x] = count_bombs(y, x)
+        @string_map[y][x] = count_bombs(y, x).to_s
       end
     end
   end
@@ -134,11 +134,9 @@ end
 
 # BoardModel
 class BoardModel < Observable
-  attr_accessor :map, :cleared_squares
+  attr_accessor :map, :cleared_squares, :length, :width
 
   # Siguientes reader son para usar en los tests
-
-  attr_reader :length, :width
 
   def initialize
     @mapclass = BoardMap.new
