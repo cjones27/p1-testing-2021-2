@@ -43,7 +43,7 @@ end
 # BoardMap
 class BoardMap
   attr_accessor :map
-  attr_reader :length, :width
+  attr_reader :length, :width, :bomb_count
 
   def initialize
     @length = 8
@@ -145,8 +145,7 @@ class BoardModel < Observable
     @cleared_squares = 0
     @length = @mapclass.length
     @width = @mapclass.width
-    @amount_square_to_win = 71
-    # El atributo anterior es 71 ya que son 81 cuadrados y 10 bombas.
+    @amount_square_to_win = @length * @width - @mapclass.bomb_count
     super()
   end
 
@@ -187,7 +186,7 @@ class BoardModel < Observable
 
     unlock_square_neighbors(y_position, x_position)
     # checkeo de victoria
-    'game winner' if @cleared_squares == 71
+    'game winner' if @cleared_squares == @amount_square_to_win
   end
 
   def unlock_square_neighbors(y_position, x_position)
