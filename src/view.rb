@@ -24,7 +24,7 @@ class BoardView < Observer
 
   def print_board(board_model)
     matrix = board_model.map
-    puts '  012345678'
+    puts '  01234567'
     puts '  ---------'
     print_matrix(matrix)
     puts '  ---------'
