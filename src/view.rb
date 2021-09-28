@@ -61,10 +61,6 @@ class BoardView < Observer
     puts 'You won! Congratulations :)'
   end
 
-  def print_no_flag_in_map_error
-    puts 'There is no F in the map so you can´t choose option 3 yet'
-  end
-
   def print_flag_square_error
     puts 'You can´t flag a square which has already been unlocked'
   end

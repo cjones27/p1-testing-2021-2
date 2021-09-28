@@ -1,7 +1,7 @@
 {
   "Unit Tests": {
     "coverage": {
-      "/home/jirojas/Desktop/u_2021_2/testing/p1-testing-2021-2/src/model.rb": {
+      "/Users/ismael/Desktop/testing/p1-testing-2021-2/src/model.rb": {
         "lines": [
           null,
           null,
@@ -69,9 +69,9 @@
           1,
           null,
           1,
-          12,
-          12,
-          12,
+          11,
+          11,
+          11,
           null,
           10,
           null,
@@ -107,19 +107,19 @@
           null,
           null,
           1,
-          49,
-          49,
-          49,
-          49,
-          49,
+          47,
+          47,
+          47,
+          47,
+          47,
           null,
           null,
           1,
-          49,
-          49,
-          49,
-          49,
-          49,
+          47,
+          47,
+          47,
+          47,
+          47,
           null,
           null,
           1,
@@ -263,7 +263,7 @@
           null
         ]
       },
-      "/home/jirojas/Desktop/u_2021_2/testing/p1-testing-2021-2/src/observer/observable.rb": {
+      "/Users/ismael/Desktop/testing/p1-testing-2021-2/src/observer/observable.rb": {
         "lines": [
           null,
           null,
@@ -284,6 +284,6 @@
         ]
       }
     },
-    "timestamp": 1632840089
+    "timestamp": 1632860904
   }
 }
