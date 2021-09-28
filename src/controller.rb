@@ -13,7 +13,10 @@ class BoardController
     @view.print_board(@model)
     @view.print_actions
     action = $stdin.gets.to_i
+    handle_main_menu_action(action)
+  end
 
+  def handle_main_menu_action(action)
     case action
     when 1
       unlock_square
@@ -60,18 +63,25 @@ class BoardController
     y = coords[1]
 
     resultado_jugada = @model.unlock_square(y, x)
+    handle_unlock_square_result(resultado_jugada)
+  end
 
+  def handle_unlock_square_result(resultado_jugada)
     case resultado_jugada
     when 'game over'
       @view.print_game_over(@model)
     when 'game winner'
       @view.print_game_winner(@model)
     when 'square already unlocked'
-      @view.print_unlock_square_error
-      main_menu
+      handle_square_already_unlocked
     else
       main_menu
     end
+  end
+
+  def handle_square_already_unlocked
+    @view.print_unlock_square_error
+    main_menu
   end
 
   def flag_unflag_square
