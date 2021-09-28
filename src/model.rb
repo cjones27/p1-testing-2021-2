@@ -185,20 +185,20 @@ class BoardModel < Observable
     check_unlock = unlock_selected_square(y_position, x_position)
     return check_unlock if check_unlock != 'next'
 
-    # return 'game over' if unlock_selected_square(y_position, x_position) == 'game over'
-
-    # return 'square already unlocked' if @map[y_position][x_position].item_view == '?'
-
-    neighbors = get_neighbors(y_position, x_position)
-    if neighbors != []
-      neighbors.each do |neighbor|
-        next unless @map[neighbor[0]][neighbor[1]].item_view == '?'
-
-        unlock_square(neighbor[0], neighbor[1]) if @map[y_position][x_position].item == '0'
-      end
-    end
+    unlock_square_neighbors(y_position, x_position)
     # checkeo de victoria
     'game winner' if @cleared_squares == 71
+  end
+
+  def unlock_square_neighbors(y_position, x_position)
+    neighbors = get_neighbors(y_position, x_position)
+    return if neighbors == []
+
+    neighbors.each do |neighbor|
+      next unless @map[neighbor[0]][neighbor[1]].item_view == '?'
+
+      unlock_square(neighbor[0], neighbor[1]) if @map[y_position][x_position].item == '0'
+    end
   end
 
   def unlock_selected_square(y_position, x_position)
