@@ -43,7 +43,7 @@ end
 # BoardMap
 class BoardMap
   attr_accessor :map
-  attr_reader :length, :width, :bomb_count
+  attr_reader :length, :width, :bomb_count, :string_map
 
   def initialize
     @length = 8
@@ -58,6 +58,9 @@ class BoardMap
     create_bomb_coords
     fill_numbers
     populate_map
+    # print @string_map
+    # puts ""
+    # print @map
   end
 
   def create_bomb_coords
@@ -134,7 +137,7 @@ end
 
 # BoardModel
 class BoardModel < Observable
-  attr_accessor :map, :cleared_squares, :length, :width
+  attr_accessor :map, :cleared_squares, :length, :width, :mapclass
 
   # Siguientes reader son para usar en los tests
 
