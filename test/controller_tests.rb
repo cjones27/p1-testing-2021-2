@@ -24,11 +24,11 @@ class BoardControllerTest < Test::Unit::TestCase
   #   assert_equal(false, @model.map[0][0].flagged)
   # end
 
-  def test_receive_input
-    result = @controller.receive_input
-    assert_true(result[0].instance_of?(String))
-    assert_true(result[1].instance_of?(String))
-  end
+  # def test_receive_input
+  #   result = @controller.receive_input
+  #   assert_true(result[0].instance_of?(String))
+  #   assert_true(result[1].instance_of?(String))
+  # end
 
   # def test_unlock_square_correctly_case
   #   @controller.unlock_square('2', '2')
