@@ -27,7 +27,7 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
   end
 
   def test_check_if_valid_coordinate_case_x_valid
-    x = rand(@boardmodel.width)
+    x = rand(@boardmodel.width).to_s
     boolean = @boardmodel.check_if_valid_coordinate('x', x)
     assert(boolean)
   end
@@ -36,6 +36,16 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
     x = rand(@boardmodel.length)
     boolean = @boardmodel.check_if_valid_coordinate('w', x)
     assert(!boolean)
+  end
+
+  def test_check_if_valid_coordinate_case_x_empty_string
+    x = '\n'
+    assert(!@boardmodel.check_if_valid_coordinate('x', x))
+  end
+
+  def test_check_if_valid_coordinate_case_y_empty_string
+    y = '\n'
+    assert(!@boardmodel.check_if_valid_coordinate('y', y))
   end
 
   def test_check_if_valid_coordinate_case_x_letter_in_input
@@ -66,7 +76,10 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
   end
 
   def test_check_if_valid_coordinate_case_y_valid
-    y = rand(@boardmodel.length)
+    y = rand(@boardmodel.length).to_s
+    puts 'AAAA'
+    puts y
+    puts 'AAAA'
     boolean = @boardmodel.check_if_valid_coordinate('y', y)
     assert(boolean)
   end
@@ -268,10 +281,14 @@ class BoardModelNeighborsTest < Test::Unit::TestCase
     assert(set_neighbors.difference(set_neighbors_expected).none?)
     assert_equal(neighbors.length, neighbors_expected.length)
   end
+end
 
-  def test_winner_game
-    @boardmodel.cleared_squares = @boardmodel.length * @boardmodel.width - @boardmodel.mapclass.bomb_count - 1
-    count_row, count_column = 0, 0
+class BoardModelOtherTests < Test::Unit::TestCase
+  def setup
+    @boardmodel = BoardModel.new
+  end
+
+  def get_map(count_column = 0, count_row = 0)
     array_coordinates = []
     @boardmodel.mapclass.string_map.each do |row|
       row.each do |string_square|
@@ -281,6 +298,12 @@ class BoardModelNeighborsTest < Test::Unit::TestCase
       count_column = 0
       count_row += 1
     end
+    array_coordinates
+  end
+
+  def test_winner_game
+    @boardmodel.cleared_squares = @boardmodel.length * @boardmodel.width - @boardmodel.mapclass.bomb_count - 1
+    array_coordinates = get_map
     coordinate = array_coordinates.sample
     output = @boardmodel.unlock_square(coordinate[0], coordinate[1])
     assert_equal('game winner', output)

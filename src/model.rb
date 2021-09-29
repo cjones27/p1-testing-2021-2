@@ -46,8 +46,8 @@ class BoardMap
   attr_reader :length, :width, :bomb_count, :string_map
 
   def initialize
-    @length = 8
-    @width = 8
+    @length = 9
+    @width = 9
     @string_map = Array.new(@length) { Array.new(@width, 0) }
     @map = []
     @bomb_count = 10
@@ -251,7 +251,9 @@ class BoardModel < Observable
   end
 
   def only_int_in_str(str)
-    if str =~ (/[a-zA-Z!@£$%^&*()_{}"|?><~+“‘«æ÷≥≤«¡≠–`±’”Æ»Ú˘¿¯]/) || str.to_s.match?(' ')
+    if str == "\n"
+      false
+    elsif str =~ (/[a-zA-Z!@£$%^&*()_{}"|?><~+“‘«æ÷≥≤«¡≠–`±’”Æ»Ú˘¿¯]/) || str.to_s.match?(' ')
       false
     else
       true

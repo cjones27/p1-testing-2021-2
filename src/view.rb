@@ -25,7 +25,7 @@ class BoardView < Observer
 
   def print_board(board_model)
     matrix = board_model.map
-    puts '  01234567'
+    puts '  012345678'
     puts '  ---------'
     print_matrix(matrix)
     puts '  ---------'
@@ -70,7 +70,7 @@ class BoardView < Observer
 
   def print_unlock_square_error
     puts 'You can´t unlock a square which has already been unlocked or flagged'
-    puts 'If the square chosen is flagged, you can unflag it and then unlock'
+    puts 'If the chosen square is flagged, you can unflag it and then unlock'
   end
 
   def print_exit
