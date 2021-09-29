@@ -77,9 +77,6 @@ class BoardModelCoordinatesTest < Test::Unit::TestCase
 
   def test_check_if_valid_coordinate_case_y_valid
     y = rand(@boardmodel.length).to_s
-    puts 'AAAA'
-    puts y
-    puts 'AAAA'
     boolean = @boardmodel.check_if_valid_coordinate('y', y)
     assert(boolean)
   end
@@ -307,5 +304,22 @@ class BoardModelOtherTests < Test::Unit::TestCase
     coordinate = array_coordinates.sample
     output = @boardmodel.unlock_square(coordinate[0], coordinate[1])
     assert_equal('game winner', output)
+  end
+
+  def test_only_int_in_str
+    boolean = @boardmodel.only_int_in_str("\n")
+    assert(!boolean)
+
+    boolean2 = @boardmodel.only_int_in_str(' ')
+    assert(!boolean2)
+
+    boolean3 = @boardmodel.only_int_in_str('a')
+    assert(!boolean3)
+
+    boolean4 = @boardmodel.only_int_in_str('!')
+    assert(!boolean4)
+
+    boolean5 = @boardmodel.only_int_in_str('5')
+    assert(boolean5)
   end
 end

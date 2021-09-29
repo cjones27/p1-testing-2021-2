@@ -64,8 +64,12 @@ class BoardController
     x = coords[0]
     y = coords[1]
 
-    resultado_jugada = @model.unlock_square(y, x)
+    resultado_jugada = unlock(y, x)
     handle_unlock_square_result(resultado_jugada)
+  end
+
+  def unlock(y_coord, x_coord)
+    @model.unlock_square(y_coord, x_coord)
   end
 
   def handle_unlock_coords_false

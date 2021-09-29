@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'matrix'
-require_relative './observer/observer'
+# require_relative './observer/observer'
 
 # BoardView
-class BoardView < Observer
+class BoardView
   def update(board_model)
     clean
     printBoard(board_model)
