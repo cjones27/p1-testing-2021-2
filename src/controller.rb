@@ -21,7 +21,7 @@ class BoardController
     when 1
       unlock_square
     when 2
-      flag_unflag_square
+      receive_flag_coords
     when 3
       @view.print_exit
     else
@@ -50,7 +50,7 @@ class BoardController
 
     return false unless @model.check_if_valid_coordinate('y', input_y)
 
-    [x.to_i, y.to_i]
+    [input_x.to_i, input_y.to_i]
   end
 
   def unlock_square
@@ -91,19 +91,23 @@ class BoardController
     main_menu
   end
 
-  def flag_unflag_square
+  def receive_flag_coords
     inputs = receive_input
-    coords = coords_input(inputs[0], inputs[1])
+    flag_unflag_square(inputs[0], inputs[1])
+    main_menu
+  end
+
+  def flag_unflag_square(x_coord, y_coord)
+    coords = coords_input(x_coord, y_coord)
     if coords == false
       handle_unflag_coords_false
       return
     end
 
-    x = coords[0]
     y = coords[1]
+    x = coords[0]
 
     @view.print_flag_square_error if @model.flag_unflag_square(y, x) == 'square already unlocked'
-    main_menu
   end
 
   def handle_unflag_coords_false
