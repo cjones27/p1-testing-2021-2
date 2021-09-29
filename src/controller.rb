@@ -11,8 +11,8 @@ class BoardController
 
   def main_menu
     @view.print_board(@model)
-    @view.print_actions
-    action = $stdin.gets.to_i
+    action = @view.print_actions
+    # action = $stdin.gets.to_i
     handle_main_menu_action(action)
   end
 
@@ -38,24 +38,26 @@ class BoardController
     @view.print_input_error
   end
 
-  def coords_input
-    @view.print_enter_x
+  def receive_input
+    x = @view.print_enter_x
+    y = @view.print_enter_y
 
-    x = $stdin.gets
-    return false unless @model.check_if_valid_coordinate('x', x)
+    [x, y]
+  end
 
-    @view.print_enter_y
-    y = $stdin.gets
-    return false unless @model.check_if_valid_coordinate('y', y)
+  def coords_input(input_x, input_y)
+    return false unless @model.check_if_valid_coordinate('x', input_x)
+
+    return false unless @model.check_if_valid_coordinate('y', input_y)
 
     [x.to_i, y.to_i]
   end
 
   def unlock_square
-    coords = coords_input
+    inputs = receive_input
+    coords = coords_input(inputs[0], inputs[1])
     if coords == false
-      print_input_error
-      unlock_square
+      handle_unlock_coords_false
       return
     end
 
@@ -64,6 +66,11 @@ class BoardController
 
     resultado_jugada = @model.unlock_square(y, x)
     handle_unlock_square_result(resultado_jugada)
+  end
+
+  def handle_unlock_coords_false
+    print_input_error
+    unlock_square
   end
 
   def handle_unlock_square_result(resultado_jugada)
@@ -85,10 +92,10 @@ class BoardController
   end
 
   def flag_unflag_square
-    coords = coords_input
+    inputs = receive_input
+    coords = coords_input(inputs[0], inputs[1])
     if coords == false
-      print_input_error
-      flag_unflag_square
+      handle_unflag_coords_false
       return
     end
 
@@ -97,5 +104,10 @@ class BoardController
 
     @view.print_flag_square_error if @model.flag_unflag_square(y, x) == 'square already unlocked'
     main_menu
+  end
+
+  def handle_unflag_coords_false
+    print_input_error
+    flag_unflag_square
   end
 end

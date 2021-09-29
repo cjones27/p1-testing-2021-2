@@ -15,6 +15,7 @@ class BoardView < Observer
     puts '1 Unlock Square'
     puts '2 Flag/unflag Square'
     puts '3 Exit Game'
+    $stdin.gets.to_i
   end
 
   def print_input_error
@@ -45,10 +46,12 @@ class BoardView < Observer
 
   def print_enter_x
     puts 'Enter X coordinate'
+    $stdin.gets
   end
 
   def print_enter_y
     puts 'Enter Y coordinate'
+    $stdin.gets
   end
 
   def print_game_over(board_model)
