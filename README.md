@@ -30,7 +30,7 @@ Para jugar, el jugador puede realizar una de las siguientes 3 acciones:
 | 2 | Flag/Unflag  Square | Marca o desmarca una celda que uno cree que puede ser una bomba |
 | 3 | Exit Game | Finaliza el juego y vuelve a la consola |
 
-Si las opciones 1 o 2 son escogidas, se le solicitará al usuario poner primero un input X, que corresponde a la posición en el eje horizontal, y después un input Y que corresponde a la posición en el eje vertical.
+Si las opciones 1 o 2 son escogidas, se le solicitará al usuario poner primero un input X, que corresponde a la posición en el eje horizontal, y después un input Y que corresponde a la posición en el eje vertical. Al revelar una celda que no sea una bomba, aparecerá en su lugar un número que representa la cantidad de bombas con las que esa celda tiene contacto, es decir, con bombas en celdas adyacentes.
 
 Mientras el jugador no pierda, irá revelando cada vez más celdas hasta que no queden celdas sin bombas. En ese momento, el jugador va a haber ganado el juego.
 
