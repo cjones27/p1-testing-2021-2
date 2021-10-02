@@ -2,7 +2,7 @@
 
 require 'rubocop/rake_task'
 
-task default: %w[test]
+task default: %w[test lint]
 
 task :test do
   ruby 'test/model_tests.rb'

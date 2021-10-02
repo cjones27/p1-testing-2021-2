@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './observer/observable'
+# require_relative './observer/observable'
 require 'matrix'
 
 # BoardSquare
@@ -136,7 +136,7 @@ class BoardMap
 end
 
 # BoardModel
-class BoardModel < Observable
+class BoardModel
   attr_accessor :map, :cleared_squares, :length, :width, :mapclass
 
   # Siguientes reader son para usar en los tests
