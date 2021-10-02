@@ -36,7 +36,7 @@ Mientras el jugador no pierda, irá revelando cada vez más celdas hasta que no 
 
 ## Ejemplo
 
-Aquí podrás encontrar un [vídeo de prueba]().
+Aquí podrás encontrar un [vídeo de prueba](https://www.youtube.com/watch?v=hn_YpP9WdOo).
 
 A continuación se muestra un ejemplo de la vista del jugador:
 
