@@ -1,7 +1,8 @@
 # Testing Proyecto 1: Minsweeper 💣
 
+Desarrollo de juego Minesweeper (Buscaminas) en el contexto del proyecto 1 del curso IIC3745 - Testing. 
+
 ## Introducción
-Se desarrolló el juego Minesweeper (Buscaminas) en el contexto del proyecto 1 del curso IIC3745 - Testing. 
 
 El juego consta de un juego normal de Minesweeper de 9x9 (índices de 0 a 8) con todas las funcionalidades como descubrir casillas, marcar celdas, mapas aleatorios, ganar el juego y poder salir de el. Este programa fue construido en ruby y se juega a través de la consola. Se utilizó un patrón de Modelo Vista Controlador (MVC). Además, se desarrolló testeo de cobertura de líneas de código, unit testing, verificación de ofensas con rubocop e integracíon continua usando Travis-ci.
 
