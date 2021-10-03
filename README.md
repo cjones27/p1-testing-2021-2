@@ -1,4 +1,5 @@
 # Testing Proyecto 1: Minsweeper 💣
+# Integrantes: Ismael Contreras, Cristóbal Jones, Matías Martínez, Javiera Rojas, Martín Sánchez
 
 Desarrollo de juego Minesweeper (Buscaminas) en el contexto del proyecto 1 del curso IIC3745 - Testing. 
 
